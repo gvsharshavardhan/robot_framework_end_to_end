@@ -1,0 +1,633 @@
+Python - UI Robert framework:
+--------------------
+
+Robot framework doc:
+http://robotframework.org/robotframework/latest/RobotFrameworkUserGuide.html#user-keyword-return-values
+
+
+installation:
+---------------
+pip install selenium
+pip install robotframework
+pip install robotframework-seleniumlibrary==3.3.1
+
+
+(Pycharm 2020.1, Robot Framework 3.2.2 and SeleniumLibrary 4.5.0)
+
+pip commands:
+--------------
+pip install <library>
+pip uninstall <lib>
+pip show <lib>
+pip check <lib>
+pip list
+
+add above pkgs in pycharm - setting -> python interpreter
+
+add "intellibot-selenium patched" plugin
+
+
+1****
+
+testcases file -> .robot extension
+excel file -> .xls
+notepad -> .txt
+python -> .py
+
+
+
+------------------------------
+Every robot file has 4 sections(not mandatory to have all the sections)
+
+4 sections:
+--------------
+Settings
+Variables
+Test cases
+Keyword
+
+**
+we can have these sections in a single file or in a different files
+
+driver:
+--------
+1.download drivers from selenium website
+2. copy driver in the scripts folder
+
+
+https://demo.nopcommerce.com/ : test website
+
+
+
+##############
+Agenda:
+##############
+
+1***
+-------
+Project folder structure
+File extensions
+Multiple sections in Robot file
+Writing Test case
+Report
+
+
+2** (text box/ input box/ page title)
+---------------------------------------
+working with web elements
+
+Text box/Input box
+	- visibility status
+		element should be visible  ${"email"}
+
+	- Enabled status
+		element should be enabled  css:[name='q']
+
+	- provide value
+		input text  css:[name='q']  harshavardhan
+
+	- clearing value
+		clear element text  css:[name='q']
+
+	- verify title of the page
+		title should be  nopCommerce demo store
+
+3**(sleep / selenium speed / maximize / radio buttons / checkbox)
+------------------------------------------------------------------
+sleep:
+sleep  <seconds>
+
+selenium speed:
+	set selenium speed  2seconds
+
+working with Radio button & check boxes
+http://www.practiceselenium.com/practice-form.html
+
+maximize browser window:
+	maximize browser window
+
+radio button:
+	select radio button  <name>    <value>
+
+checkbox:
+	select checkbox  <name/id>
+	unselect checkbox  <name/id>
+
+
+
+4**(drop down/ list box)
+-------------------------
+drop down:
+	select from list by label	<name of dropdown>	<label>
+	select from list by value	<name of dropdown>	<value>
+	select from list by index	<name of dropdown>	<index>
+
+	unselect from list by label/value/index	<name of dropdown>	<label/value/index>
+
+list box:
+	same as above
+
+Working with Lists:
+-------------------------------
+Get List Items - Returns all labels or values of selection list locator
+Get Selected List Label - Returns the label of selected option from selection list locator
+Get Selected List Value - Returns the value of selected option from selection list locator
+Select From List By Index - Selects options from selection list locator by indexes
+Select From List By Label - Selects options from selection list locator by labels
+Select From List By Value - Selects options from selection list locator by values
+Select All From List - Selects all options from multi-selection list locator
+Get Selected List Labels - Returns labels of selected options from selection list locator
+Get Selected List Values - Returns values of selected options from selection list locator
+Unselect From List By Index - Unselects options from selection list locator by indexes
+Unselect From List By Label - Unselects options from selection list locator by labels
+Unselect From List By Value - Unselects options from selection list locator by values
+Unselect All From List - Unselects all options from multi-selection list locator
+List Selection Should Be - Verifies selection list locator has expected options selected
+List Should Have No Selections - Verifies selection list locator has no options selected
+Page Should Contain List - Verifies selection list locator is found from current page
+Page Should Not Contain List - Verifies selection list locator is not found from current page
+
+
+
+5**(selenium speed / selenium Timeout / Implicit wait / sleep)
+-----------------------------------------------------------------
+http://demowebshop.tricentis.com/register
+
+console log(print):
+	log to console <var>
+
+selenium speed:
+---------------
+default speed:
+	${speed} get selenium speed
+	log to console ${speed}
+
+set selenium speed  2seconds
+
+timeout:
+--------
+Library  SeleniumLibrary  timeout=10s //global timeout
+
+wait until page contains <text>  //default timeout is 5 seconds
+
+for userdefined timeout:
+		set selenium timeout 10seconds
+		wait until page contains <text>
+
+implicit wait:(default value is 0 seconds)
+--------------
+it will be applicable for all the elements in the page
+
+set selenium implicit wait <seconds>
+
+to get selenium implicitwait:
+	${wait} = get selenium implicit wait
+
+* Set Selenium Implicit Wait - Sets the implicit wait value used by Selenium
+* Get Selenium Implicit Wait - Gets the implicit wait value used by Selenium
+* Set Browser Implicit Wait - Same as Set Selenium Implicit Wait but only affects the current browser
+
+
+
+Explict wait:
+-----------------
+* Wait Until Page Contains - Waits until text appears on the current page
+* Wait Until Page Contains Element - Waits until the element locator appears on the current page
+*Wait Until Page Does Not Contain - Waits until text disappears from the current page
+* Wait Until Page Does Not Contain Element - Waits until the element locator disappears from the current page
+* Wait Until Location Is - Waits until the current URL is expected
+* Wait Until Location Is Not - Waits until the current URL is not location
+* Wait Until Location Contains - Waits until the current URL contains expected
+* Wait Until Location Does Not Contain - Waits until the current URL does not contains location
+* Wait Until Element Contains - Waits until the element locator contains text
+* Wait Until Element Does Not Contain - Waits until the element locator does not contain text
+* Wait Until Element Is Enabled - Waits until the element locator is enabled
+* Wait Until Element Is Not Visible - Waits until the element locator is not visible
+* Wait Until Element Is Visible - Waits until the element locator is visible
+
+
+
+6** How to close single & multiple browsers:
+---------------------------------------------
+single: closes latest opened browser
+	close browser
+all: to close all browsers
+	close all browsers
+
+
+
+
+7** Handling alerts and frames:
+---------------------------------
+http://testautomationpractice.blogspot.com/
+
+alerts:
+--------
+to ok alerts:
+	handle alert accept
+
+to dismiss:
+	handle alert dismiss
+
+to keep alert without closing:
+	handle alert leave
+
+to check presence of alert:
+	alert should be present <alert text>
+
+* Handle Alert - Handles the current alert and returns its message.
+ * Input Text Into Alert - Types the given text into an input field in an alert.
+ * Alert Should Be Present - Verifies that an alert is present and by default, accepts it
+ * Alert Should Not Be Present - Verifies that no alert is present.
+
+Frames:
+--------
+https://www.selenium.dev/selenium/docs/api/java/index.html?overview-summary.html
+
+select frame <frame name> //id or name or xpath
+
+before moving to other frame we have to unselect the frame:
+unselect frame
+
+* Select Frame - Sets frame identified by locator as the current frame
+* Unselect Frame - Sets the main frame as the current frame.
+* Frame Should Contain - Verifies that frame identified by locator contains text
+		Frame should contain  <frame locator>   <text to search>
+* Current Frame Should Contain - Verifies that the current frame contains text
+* Current Frame Should Not Contain - Verifies that the current frame does not contain text
+
+
+
+
+8** Handling tabbed windows and browser windows:
+-------------------------------------------------
+http://demo.automationtesting.in/Windows.html
+
+tabbed window:
+--------------
+select window title=<name>
+
+browser windows:
+-----------------
+based on index we have to switch.
+
+	switch browser <index> // or alias
+
+get title:
+-------------
+	get title
+
+example:
+----------
+BrowserA
+           Window 1  (location=https://robotframework.org/)
+           Window 2  (location=https://robocon.io/)
+           Window 3  (location=https://github.com/robotframework/)
+
+BrowserB
+           Window 1  (location=https://github.com/)
+
+
+
+9** Browser related keywords(Go to / Go Back / get location):
+------------------------------
+to get current url of the browser:
+------------------------------------
+${loc} = get location
+
+to go to other url:
+--------------------
+	go to <url>
+
+to go back :
+--------------
+	go back
+
+10** screenshots:
+-----------------
+https://opensource-demo.orangehrmlive.com/
+element screenshot:
+----------------------
+	capture element screenshot xpath:"<xpath>"   <location to store screenshots>
+
+
+page screenshot:
+--------------------
+	capture  page  screenshot <location to store screenshots/abc.png>
+
+note: if no location is specified and just a name then by default they will be saved inside the project.
+
+11** Mouse actions(right click / double click / drag and drop):
+----------------------------------------------------------------
+Right click context menu:
+https://swisnl.github.io/jQuery-contextMenu/demo.html
+
+Right click / context menu:
+----------------------------
+	open context menu xpath:<xpath>
+
+Double click:
+---------------
+http://testautomationpractice.blogspot.com/
+
+	double click element xpath:<xpath>
+
+Drag and drop:
+----------------
+http://www.dhtmlgoodies.com/scripts/drag-drop-custom/demo-drag-drop-3.html
+
+note: source and target elements are important.
+
+	drag and drop xpath:<source> xpath:<target>
+
+
+12** userdefined keywords:
+---------------------------
+1. without arguments
+2. with arguments
+3. with arguments and return value
+
+http://demo.guru99.com/test/newtours/
+
+1. without arguments
+----------------------
+
+launchBrowser
+	open browser <url>  <browser>
+	maximize browser window
+
+2. with arguments
+-------------------------
+
+launchBrowser
+	[Arguments] ${url}  ${browser}
+	open browser ${url}  ${browser}
+	maximize browser window
+
+3. with arguments and return value
+------------------------------------
+
+launchBrowser
+	[Arguments] ${url}  ${browser}
+	open browser ${url}  ${browser}
+	maximize browser window
+	${title}= get title
+	[Return] ${title}
+
+
+note:
+--------
+when our keywords are in other file and directory, then..
+
+***Settings***
+Resource ../Resource/resources.robot     #like import
+
+13**javascript executor (Scrolling pages)
+------------------------------------------
+1.scrolling till it reach a pixel number
+2.till the element on page
+3.till the bottom
+
+https://www.countries-ofthe-world.com/flags-of-the-world.html
+
+1.scrolling till it reach a pixel number
+	execute javascript window.scrollTo(0,1500)
+
+2.till the element on page
+	scroll element into view xpath:<xpath>
+
+3.till the bottom
+	execute javascript window.scrollTo(0,document.body.scrollHeight)
+
+
+14** for loop:
+-----------------
+testcase1
+	: FOR  ${i}	IN RANGE	1	10
+	\	log to console ${i}
+
+testcase2
+	: FOR  ${i}	IN RANGE	1	2	3	4	5
+	\	log to console ${i}
+
+testcase3
+	@{items}	create	list 1	2	3	4	5
+	: FOR  ${i}	IN RANGE	@{items}
+	\	log to console ${i}
+
+testcase4
+	@{names}	create	list	harshavardhan	vardhan		sai
+	: FOR  ${i}	IN RANGE	@{names}
+	\	log to console ${i}
+
+exit for loop:
+---------------
+testcase
+	@{names}	create	list	1	2	3	4	5
+	: FOR  ${i}	IN RANGE	@{names}
+	\	log to console ${i}
+	\	exit for loop if  ${i}==3
+
+
+15** links on web page:
+------------------------------------
+1. count no of links on web page
+2. get all the links on web page
+
+1. count no of links on web page
+	${links_count}= get element count xpath://a
+
+2. get all the links on web page
+	${links_count}= get element count xpath://a			#links count
+
+	@{Link_items}= create list					#create an empty list
+
+	: FOR  ${i}	IN RANGE	1	@{Link_items}+1
+	\	log to console ${i}
+	\	${link_text}= get text xpath:(//a)[${i}]
+	\ 	log to console ${link_text}
+
+
+
+
+16** Working with HTML Tables:
+-------------------------------
+1. Count no of rows in a table  			# //tbody/tr
+2. Count no of columns in a table			# //tbody/tr[1]/th
+3. Get data from table						# //tbody/tr[row_num]/td[column_num]
+4. Validations on the table
+
+to get elements count that are matching the xpath:
+---------------------------------------------------
+	${ele_count}= get element count xpath:<xpath>
+
+validations:
+------------
+1. value in a column:
+	table column should contain <xpath to table>	<column_num>	<expected_value>
+
+2. value in a row:
+	table row should contain <xpath to table>	<row_num>	<expected_value>
+
+3. value in a table(specific cell):
+	table cell should contain <xpath to table>	<column_num>	<row_num>	<expected_value>
+
+4. value in a header:
+	table header should contain	<xpath to table>	<expected_value>
+
+
+
+
+17** Data driven testing:
+---------------------------
+https://admin-demo.nopcommerce.com/
+
+1. Test Data in a script
+2. Test Data from excel file
+3. Test Data from CSV file
+
+library:
+-----------
+https://pypi.org/project/robotframework-datadriver/
+
+1. Test Data in a script
+-------
+before suite( Suite Setup <keyword>):
+---------------------------------------
+place suite setup in settings:
+	Suite Setup <Open my Browser/ keyword>
+
+after suite( Suite Teardown <keyword>):
+----------------------------------------
+place suite teardown in settings:
+	Suite Teardown <close browsers>
+
+place test template in settings:
+	Test Template <keyword_test>
+
+***Test Cases*** 			username				password
+Right user empty password	admin@yourstore.com		${empty}
+Right user wrong password	admin@yourstore.com		adb
+wrong user right password	adm@yourstore.com		admin
+wrong user empty password	adm@yourstore.com		adb
+wrong user wrong password	adm@yourstore.com		adb
+
+
+
+
+
+
+
+2. Test Data from excel file / csv file
+-------------------------------
+install robotframework-datadriver
+
+add below in setting:
+Library  DataDriver 	../testData/data_login.xlsx 	sheet_name=Sheet1
+Library  DataDriver 	../testData/data_login.csv 		#for csv
+
+place test template in settings:
+	Test Template <keyword_test>
+
+*** Test Cases ***
+loginWithExcel using    ${username}     ${password}
+
+18** (test/ suite)setup and teardown in Robot framework
+---------------------------------------------------------
+1. Test Setup - before every test
+2. Test Teardown - after every test
+3. Suite Setup - before every suite
+4. Suite TearDown - after every suite
+
+should be written inside the settings block.
+
+19** Grouping tests using tags
+-------------------------------
+in the first line of the testcase add [Tags]
+	[Tags]	sanity		smoke
+
+command to execute script:-
+---------------------------
+robot --include=sanity  testcases/setup_teardown.robot
+
+-i : include
+robot -i sanity -i regression  testcases/setup_teardown.robot
+
+-e : exclude
+robot -e sanity  testcases/setup_teardown.robot
+
+
+
+
+20** Executing test suites
+-----------------------------
+1. How to run test suites
+-----------
+robot testcases\			# runs all tc's in testcases folder
+robot testcases\reg*.robot	# runs tc's in testcases folder and starting with reg
+
+
+2. How to run tests parallelly using robotframework-pabot
+-----------
+install robotframework-pabot  (or) pip install -U robotframework-pabot
+
+pabot --processes 2 testcases\*.robot		# runs tests in parallel in 2 threads
+
+
+3. How to save results in results folder
+------------
+pabot --processes 2 --outputdir  Results  testcases\*.robot
+
+4. How to run tests using single windows BAT file
+------------
+create run.bat file
+
+enter below lines inside bat file...
+cd c:\users\pycharmProjects\automationtesting
+pabot --processes 2 --outputdir  Results  testcases\*.robot
+
+now right click on bat file and click run by cmd...
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+21** headless browsers
+------------------------
+specify brower as "headlesschrome" , "headlessfirefox" instead of "chrome" and "firefox"
+
+
+
+
+22** POM (Page Object Model - Design Pattern)
+---------------------------------------------
+Resouces folder:
+	keywords.robot - user defined
+
+pageObjects folder:
+	locators.py
+
+testCases folder:
+	tests.robot
+
+testdata folder:
+	.csv, .xlsx
+
+results folder:
+	html result files
+
+
+
+23** jenkins integration:
+---------------------------
+using bat file

@@ -1,0 +1,4 @@
+command to execute to run testcases:
+======================================
+
+robot -i sanity  scenarios/*.robot
